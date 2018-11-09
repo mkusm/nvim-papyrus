@@ -1,7 +1,7 @@
 " Papyrus syntax file
 " Filename:     papyrus.vim
 " Language:     TES5 Papyrus scripting language
-" Maintainer:   Sirtaj Singh Kang <sirtaj@sirtaj.net>
+" Maintainer:   Infernio
 " Version:      1.0
 "
 " This is based on various references at http://www.creationkit.com/
