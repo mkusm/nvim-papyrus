@@ -21,17 +21,14 @@ syn case match
 
 syn keyword papyrusScript       ScriptName Extends
 
-syn keyword papyrusKeyword      Event EndEvent
-syn keyword papyrusKeyword      Function EndFunction
-syn keyword papyrusKeyword      State EndState Return
+syn keyword papyrusKeyword      Event EndEvent nextgroup=papyrusEvent
+syn keyword papyrusKeyword      Function EndFunction nextgroup=papyrusFunction
+syn keyword papyrusKeyword      State EndState
+syn keyword papyrusKeyword      Return
 
 syn keyword papyrusConditional  If ElseIf Else EndIf
 syn keyword papyrusRepeat       While EndWhile
 syn keyword papyrusImport       Import
-
-syn keyword papyrusTodo         TODO FIXME XXX
-syn region  papyrusComment      start=/{/ end=/}/ contains=papyrusTodo
-syn match   papyrusComment      /;.*$/ contains=papyrusTodo
 
 syn keyword papyrusType         Bool Boolean Int Integer Float String
 syn keyword papyrusConstant     None Self Parent
@@ -46,6 +43,10 @@ syn match   papyrusOperator     /||/
 syn match   papyrusOperator     /\[\s*\]/
 syn match   papyrusOperator     /(\s*)/
 
+syn keyword papyrusTodo         TODO FIXME XXX
+syn region  papyrusComment      start=/{/ end=/}/ contains=papyrusTodo
+syn match   papyrusComment      /;.*$/ contains=papyrusTodo
+syn match   papyrusComment      /\-\-.*$/ contains=papyrusTodo
 
 syn match   papyrusNumber       /[0-9]\+/
 syn match   papyrusNumber       /[0-9]*\.[0-9]\+/
@@ -60,36 +61,60 @@ syn region  papyrusString      start=/"/ skip=/\\"/ end=/"/
 syn region  papyrusArray        start=/\[/ end=/\]/ contains=ALL contained
 
 " Basic Skyrim Types, source: https://www.creationkit.com/index.php?title=Script_Objects
-syn keyword papyrusScriptType    Action Activator ActiveMagicEffect Actor ActorBase Alias Ammo Apparatus Armor ArmorAddon AssociationType
+syn keyword papyrusScriptType    Action Activator ActiveMagicEffect Actor ActorBase Alias Ammo Apparatus Armor AssociationType
 syn keyword papyrusScriptType    Book
-syn keyword papyrusScriptType    Cell Class ColorForm CombatStyle ConstructibleObject Container
-syn keyword papyrusScriptType    Debug DefaultObjectManager Door
-syn keyword papyrusScriptType    EffectShader Enchantment EncounterZone EquipSlot Explosion
+syn keyword papyrusScriptType    Cell Class ConstructibleObject Container
+syn keyword papyrusScriptType    Debug Door
+syn keyword papyrusScriptType    EffectShader Enchantment EncounterZone Explosion
 syn keyword papyrusScriptType    Faction Flora Form FormList Furniture
 syn keyword papyrusScriptType    Game GlobalVariable
-syn keyword papyrusScriptType    Hazard HeadPart
-syn keyword papyrusScriptType    Idle ImageSpaceModifier ImpactDataSet Ingredient Input
+syn keyword papyrusScriptType    Hazard
+syn keyword papyrusScriptType    Idle ImageSpaceModifier ImpactDataSet Ingredient
 syn keyword papyrusScriptType    Key Keyword
 syn keyword papyrusScriptType    LeveledActor LeveledItem LeveledSpell Light Location LocationAlias LocationRefType
-syn keyword papyrusScriptType    MagicEffect Math Message MiscObject ModEvent MusicType
-syn keyword papyrusScriptType    NetImmerse
+syn keyword papyrusScriptType    MagicEffect Math Message MiscObject MusicType
 syn keyword papyrusScriptType    ObjectReference Outfit
 syn keyword papyrusScriptType    Package Perk Potion Projectile
 syn keyword papyrusScriptType    Quest
 syn keyword papyrusScriptType    Race ReferenceAlias
-syn keyword papyrusScriptType    Scene Scroll Shout SKSE SoulGem Sound SoundCategory Spell Static StringUtil
+syn keyword papyrusScriptType    Scene Scroll ShaderParticleGeometry Shout SoulGem Sound SoundCategory Spell Static
 syn keyword papyrusScriptType    TalkingActivator TextureSet Topic TopicInfo
-syn keyword papyrusScriptType    UI Utility
+syn keyword papyrusScriptType    Utility
 syn keyword papyrusScriptType    VisualEffect VoiceType
 syn keyword papyrusScriptType    Weapon Weather WordOfPower WorldSpace
 
 
 " SKSE Types, source: https://www.creationkit.com/index.php?title=Category:SKSE_Script_Objects
-syn keyword papyrusScriptType    ActorValueInfo Art
+syn keyword papyrusScriptType    ActorValueInfo ArmorAddon Art
+syn keyword papyrusScriptType    ColorComponent ColorForm CombatStyle
+syn keyword papyrusScriptType    DefaultObjectManager
+syn keyword papyrusScriptType    EquipSlot
+syn keyword papyrusScriptType    FormType
+syn keyword papyrusScriptType    GameData
+syn keyword papyrusScriptType    HeadPart
+syn keyword papyrusScriptType    Input
+syn keyword papyrusScriptType    ModEvent
+syn keyword papyrusScriptType    NetImmerse
+syn keyword papyrusScriptType    SKSE SpawnerTask SoundDescriptor StringUtil
+syn keyword papyrusScriptType    TreeObject
+syn keyword papyrusScriptType    UI UICallback
+syn keyword papyrusScriptType    WornObject
 
+" Types from Other Libraries
+" CampUtil
+syn keyword papyrusScriptType    CampUtil
+" FISS
+syn keyword papyrusScriptType    FISSFactory FISSInterface
+" JContainers
+syn keyword papyrusScriptType    JArray JContainers JDB JFormDB JFormMap JIntMap JMap JValue
+" SkyUI
+syn keyword papyrusScriptType    SKI_ConfigBase SKI_QuestBase
+" SkyUILib
+syn keyword papyrusScriptType    UILib_1
 
 " Basic Skyrim Functions
 syn keyword papyrusFunction MessageBox
+
 
 " Basic Skyrim Events
 syn keyword papyrusEvent OnCellLoad
@@ -110,6 +135,7 @@ if version >= 508 || !exists("did_papyrus_syn_inits")
 
     HiLink papyrusScript Keyword
     HiLink papyrusKeyword Keyword
+    HiLink papyrusImport Keyword
     HiLink papyrusScriptType Type
     HiLink papyrusType Type
     HiLink papyrusBoolean Boolean
@@ -117,8 +143,6 @@ if version >= 508 || !exists("did_papyrus_syn_inits")
     HiLink papyrusRepeat Repeat
     HiLink papyrusFunction Function
     HiLink papyrusEvent Function
-
-    HiLink papyrusImport Import
 
     HiLink papyrusComment   Comment
     HiLink papyrusTodo Todo
