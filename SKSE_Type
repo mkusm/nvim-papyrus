@@ -1,0 +1,14 @@
+ActorValueInfo ArmorAddon Art
+ColorComponent ColorForm CombatStyle
+DefaultObjectManager
+EquipSlot
+FormType
+GameData
+HeadPart
+Input
+ModEvent
+NetImmerse
+SKSE SpawnerTask SoundDescriptor StringUtil
+TreeObject
+UI UICallback
+WornObject

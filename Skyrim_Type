@@ -1,0 +1,21 @@
+Action Activator ActiveMagicEffect Actor ActorBase Alias Ammo Apparatus Armor AssociationType
+Book Bool Boolean
+Cell Class ConstructibleObject Container
+Debug Door
+EffectShader Enchantment EncounterZone Explosion
+Faction Float Flora Form FormList Furniture
+Game GlobalVariable
+Hazard
+Idle ImageSpaceModifier ImpactDataSet Ingredient Int Integer
+Key Keyword
+LeveledActor LeveledItem LeveledSpell Light Location LocationAlias LocationRefType
+MagicEffect Math Message MiscObject MusicType
+ObjectReference Outfit
+Package Perk Potion Projectile
+Quest
+Race ReferenceAlias
+Scene Scroll ShaderParticleGeometry Shout SoulGem Sound SoundCategory Spell Static String
+TalkingActivator TextureSet Topic TopicInfo
+Utility
+VisualEffect VoiceType
+Weapon Weather WordOfPower WorldSpace

@@ -14,6 +14,10 @@ elseif exists("b:current_syntax")
     finish
 endif
 
+" Set up the autocompletion to work properly
+setlocal complete+=kSKSE_Event,kSKSE_Function,kSKSE_Type,kSkyrim_Event,kSkyrim_Function,kSkyrim_Keyword,kSkyrim_Type,kBoth_Function
+setlocal complete-=.
+
 syn case ignore
 
 syn keyword papyrusScript       ScriptName Extends
@@ -22,6 +26,7 @@ syn keyword papyrusKeyword      Event EndEvent nextgroup=papyrusEvent
 syn keyword papyrusKeyword      Function EndFunction nextgroup=papyrusFunction
 syn keyword papyrusKeyword      State EndState
 syn keyword papyrusKeyword      Return
+syn keyword papyrusKeyword      Global Native Property EndProperty Hidden Auto AutoReadOnly
 
 syn keyword papyrusConditional  If ElseIf Else EndIf
 syn keyword papyrusRepeat       While EndWhile
@@ -29,9 +34,8 @@ syn keyword papyrusImport       Import
 
 syn keyword papyrusType         Bool Boolean Int Integer Float String
 syn keyword papyrusConstant     None Self Parent
-syn keyword papyrusBoolean      true false
+syn keyword papyrusBoolean      True False
 
-syn keyword papyrusKeyword      Global Native Property EndProperty Hidden Auto AutoReadOnly
 syn keyword papyrusOperator     Length New As
 syn match   papyrusOperator     /[-+*/,=%.!<>]/
 syn match   papyrusOperator     /[-+*/<>!=%]=/
@@ -54,7 +58,7 @@ syn match   papyrusNumber       /-[0-9]\+\.[0-9]+/
 syn match   papyrusNumber       /-[0-9]*\.[0-9]+/
 syn match   papyrusNumber       /-0x[0-9ABCDEFabcdef]\+/
 
-syn region  papyrusString      start=/"/ skip=/\\"/ end=/"/
+syn region  papyrusString       start=/"/ skip=/\\"/ end=/"/
 syn region  papyrusArray        start=/\[/ end=/\]/ contains=ALL contained
 
 " Basic Skyrim Types, source: https://www.creationkit.com/index.php?title=Script_Objects
@@ -210,11 +214,49 @@ syn keyword papyrusFunction UnregisterForAllModEvents UnregisterForCameraState U
 syn keyword papyrusFunction UnregisterForMenu UnregisterForModEvent UnregisterForNiNodeUpdate UpdateHairColor UpdateThirdPerson UpdateTintMaskColors
 syn keyword papyrusFunction UpdateWeight
 
+" Functions Available in Both
+syn keyword papyrusFunction AddKeyIfNeeded AddToFaction AllowPCDialogue AllowPickpocket AvoidsRoads
+syn keyword papyrusFunction CanFly CanSwim CantOpenDoors CanWalk ClearAllowPCDialogue ClearAllowPickpocket ClearAvoidsRoads ClearCantOpenDoors
+syn keyword papyrusFunction ClearForcedLandingMarker ClearNoCombatInWater ClearNoKNockdowns ClearNoShadow ClearVendor CountLinkedRefChain
+syn keyword papyrusFunction DamageAV DeleteWhenAble DisableLinkChain
+syn keyword papyrusFunction EnableLinkChain FindClosestActorFromRef FindClosestReferenceOfAnyTypeInListFromRef FindClosestReferenceOfTypeFromRef
+syn keyword papyrusFunction FindRandomActorFromRef FindRandomReferenceOfAnyTypeInListFromRef FindRandomReferenceOfTypeFromRef ForceAV ForceRefIfEmpty
+syn keyword papyrusFunction GetActorBase GetActorRef GetActorReference GetAR GetAV GetAVIByID GetAVIByName GetAVPercentage GetBaseAV GetBlue GetGreen GetHue
+syn keyword papyrusFunction GetMaskForSlot GetNodePositionX GetNodePositionY GetNodePositionZ GetNumber GetRed GetRef GetSaturation GetScriptVersionRelease
+syn keyword papyrusFunction GetSelfAsActor GetSkillLegendaryLevel GetStage GetStageDone GetValue GetValueInt
+syn keyword papyrusFunction HasKeywordString
+syn keyword papyrusFunction Invoke InvokeNumber InvokeNumberA IsBattleaxe IsBoots IsBow IsChildRace IsClothing IsClothingBody IsClothingFeet IsClothingHands
+syn keyword papyrusFunction IsClothingHead IsClothingPoor IsClothingRich IsClothingRing IsCuirass IsDagger IsEnabled IsGauntlets IsGreatsword IsHeavyArmor
+syn keyword papyrusFunction IsHelmet IsImmobile IsInInterior IsInLocation IsJewelry IsLightArmor IsMace IsNearPlayer IsNotPushable IsPlayable IsSameLocation
+syn keyword papyrusFunction IsShield IsStaff IsSword IsVendor IsWarAxe IsWarhammer
+syn keyword papyrusFunction KillEssential
+syn keyword papyrusFunction MakeCanFly MakeCanSwim MakeCanWalk MakeChildRace MakeImmobile MakeMobile MakeNoKnockdowns MakeNonChildRace MakeNonFlying
+syn keyword papyrusFunction MakeNonSwimming MakeNonWalking MakeNotPushable MakePlayable MakePlayerFriend MakePushable MakeUnplayable MakeVendor Mod ModAR
+syn keyword papyrusFunction ModAV ModFavorPoints ModFavorPointsWithGlobal ModObjectiveGlobal MoveToIfUnloaded MoveToWhenUnloaded
+syn keyword papyrusFunction NoCombatInWater NoKnockdowns NoShadow
+syn keyword papyrusFunction RampRumble RestoreAV SetAllowPCDialogue
+syn keyword papyrusFunction SetAllowPickpocket SetAR SetAV SetAvoidsRoads SetCantOpenDoors SetNoCombatInWater SetNodePositionX SetNodePositionY
+syn keyword papyrusFunction SetNodePositionZ SetNoShadow SetNumber SetSkillLegendaryLevel SetStage SetValueInt SplineTranslateToRef TraceAndBox
+syn keyword papyrusFunction TraceConditional TranslateToRef TryToAddToFaction TryToClear TryToDisable TryToDisableNoWait TryToEnable TryToEnableNoWait
+syn keyword papyrusFunction TryToEvaluatePackage TryToKill TryToMoveTo TryToRemoveFromFaction TryToReset TryToStopCombat
+
 " Basic Skyrim Events
-syn keyword papyrusEvent OnActivate OnAnimationEvent OnAnimationEventUnregistered OnAttachedToCell OnBeginState OnCellAttach OnCellDetach OnCellLoad OnClose OnCombatStateChanged OnContainerChanged OnDeath OnDestructionStageChanged OnDetachedFromCell OnDying OnEffectFinish OnEffectStart OnEndState OnEnterBleedout OnEquipped OnGainLOS OnGetUp OnInit OnGrab OnHit OnItemAdded OnItemRemoved OnLoad OnLocationChange OnLockStateChanged OnLostLOS OnMagicEffectApply OnObjectEquipped OnObjectUnequipped OnOpen OnPackageChange OnPackageEnd OnPackageStart OnPlayerBowShot OnPlayerLoadGame OnRaceSwitchComplete OnRead OnRelease OnReset OnSell OnSit OnSleepStart OnSleepStop OnSpellCast OnStoryActivateActor OnStoryAddToPlayer OnStoryArrest OnStoryAssaultActor OnStoryBribeNPC OnStoryCastMagic OnStoryChangeLocation OnStoryCraftItem OnStoryCrimeGold OnStoryCure OnStoryDialogue OnStoryDiscoverDeadBody OnStoryEscapeJail OnStoryFlatterNPC OnStoryHello OnStoryIncreaseLevel OnStoryIncreaseSkill OnStoryInfection OnStoryIntimidateNPC OnStoryJail OnStoryKillActor OnStoryNewVoicePower OnStoryPayFine OnStoryPickLock OnStoryPlayerGetsFavor OnStoryRelationshipChange OnStoryRemoveFromPlayer OnStoryScript OnStoryServedTime OnStoryTrespass OnTrackedStatsEvent OnTranslationAlmostComplete OnTranslationComplete OnTranslationFailed OnTrapHit OnTrapHitStart OnTrapHitStop OnTrigger OnTriggerEnter OnTriggerLeave OnUnequipped OnUnload OnUpdate OnUpdateGameTime OnWardHit
+syn keyword papyrusEvent OnActivate OnAnimationEvent OnAnimationEventUnregistered OnAttachedToCell OnBeginState OnCellAttach OnCellDetach OnCellLoad OnClose
+syn keyword papyrusEvent OnCombatStateChanged OnContainerChanged OnDeath OnDestructionStageChanged OnDetachedFromCell OnDying OnEffectFinish OnEffectStart
+syn keyword papyrusEvent OnEndState OnEnterBleedout OnEquipped OnGainLOS OnGetUp OnInit OnGrab OnHit OnItemAdded OnItemRemoved OnLoad OnLocationChange
+syn keyword papyrusEvent OnLockStateChanged OnLostLOS OnMagicEffectApply OnObjectEquipped OnObjectUnequipped OnOpen OnPackageChange OnPackageEnd
+syn keyword papyrusEvent OnPackageStart OnPlayerBowShot OnPlayerLoadGame OnRaceSwitchComplete OnRead OnRelease OnReset OnSell OnSit OnSleepStart OnSleepStop
+syn keyword papyrusEvent OnSpellCast OnStoryActivateActor OnStoryAddToPlayer OnStoryArrest OnStoryAssaultActor OnStoryBribeNPC OnStoryCastMagic
+syn keyword papyrusEvent OnStoryChangeLocation OnStoryCraftItem OnStoryCrimeGold OnStoryCure OnStoryDialogue OnStoryDiscoverDeadBody OnStoryEscapeJail
+syn keyword papyrusEvent OnStoryFlatterNPC OnStoryHello OnStoryIncreaseLevel OnStoryIncreaseSkill OnStoryInfection OnStoryIntimidateNPC OnStoryJail
+syn keyword papyrusEvent OnStoryKillActor OnStoryNewVoicePower OnStoryPayFine OnStoryPickLock OnStoryPlayerGetsFavor OnStoryRelationshipChange
+syn keyword papyrusEvent OnStoryRemoveFromPlayer OnStoryScript OnStoryServedTime OnStoryTrespass OnTrackedStatsEvent OnTranslationAlmostComplete
+syn keyword papyrusEvent OnTranslationComplete OnTranslationFailed OnTrapHit OnTrapHitStart OnTrapHitStop OnTrigger OnTriggerEnter OnTriggerLeave
+syn keyword papyrusEvent OnUnequipped OnUnload OnUpdate OnUpdateGameTime OnWardHit
 
 " SKSE Events
-syn keyword papyrusEvent OnActorAction OnControlDown OnControlUp OnCrosshairRefChange OnKeyDown OnKeyUp OnMenuClose OnMenuOpen OnNiNodeUpdate OnPlayerCameraState
+syn keyword papyrusEvent OnActorAction OnControlDown OnControlUp OnCrosshairRefChange OnKeyDown OnKeyUp OnMenuClose OnMenuOpen OnNiNodeUpdate
+syn keyword papyrusEvent OnPlayerCameraState
 
 " Not currently used
 " syn match   papyrusIdentifier   "\s*[a-zA-z_][a-zA-Z0-9_]*" contained

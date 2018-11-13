@@ -1,0 +1,13 @@
+ScriptName Extends
+Event EndEvent
+Function EndFunction
+State EndState
+Return
+Property EndProperty
+Global Native Hidden Auto AutoReadOnly
+If ElseIf Else EndIf
+While EndWhile
+Import
+None Self Parent
+True False
+Length New As
