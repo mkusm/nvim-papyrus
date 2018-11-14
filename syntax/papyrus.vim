@@ -15,7 +15,7 @@ elseif exists("b:current_syntax")
 endif
 
 " Set up the autocompletion to work properly
-setlocal complete+=kSkyrim_Event,kSKSE_Event,kSkyrim_Function,kSkyrim_Type,kSkyrim_Keyword,kSKSE_Function,kSKSE_Type,kBoth_Function
+setlocal complete+=kSkyrim_Event,kSKSE_Event,kSSE_Event,kSkyrim_Function,kSkyrim_Type,kSkyrim_Keyword,kSKSE_Function,kSKSE_Type,kSSE_Function,kBoth_Function
 setlocal complete-=.
 
 syn case ignore
@@ -61,7 +61,7 @@ syn match   papyrusNumber       /-0x[0-9ABCDEFabcdef]\+/
 syn region  papyrusString       start=/"/ skip=/\\"/ end=/"/
 syn region  papyrusArray        start=/\[/ end=/\]/ contains=ALL contained
 
-" Basic Skyrim Types, source: https://www.creationkit.com/index.php?title=Script_Objects
+" Skyrim Types, source: https://www.creationkit.com/index.php?title=Script_Objects
 syn keyword papyrusScriptType   Action Activator ActiveMagicEffect Actor ActorBase Alias Ammo Apparatus Armor AssociationType
 syn keyword papyrusScriptType   Book
 syn keyword papyrusScriptType   Cell Class ConstructibleObject Container
@@ -120,7 +120,7 @@ syn keyword papyrusScriptType   UILib_1
 syn keyword papyrusScriptType   CosmeticMenu UICosmeticMenu UIDyeMenu UIExtensions UIListMenu UIMagicMenu UIMenuBase UISelectionMenu UIStatsMenu
 syn keyword papyrusScriptType   UITextEntryMenu UIWheelMenu
 
-" Basic Skyrim Functions
+" Skyrim Functions
 syn keyword papyrusFunction abs acos Activate Add AddAchievement AddDependentAnimatedObjectReference AddForm AddHavokBallAndSocketConstraint
 syn keyword papyrusFunction AddInventoryEventFilter AddItem AddPerk AddPerkPoints AddShout AddSpell AddToMap AdvanceSkill AllowBleedoutDialogue Apply
 syn keyword papyrusFunction ApplyCrossFade ApplyHavokImpulse asin atan AttachAshPile
@@ -300,7 +300,10 @@ syn keyword papyrusFunction UnregisterForAllModEvents UnregisterForCameraState U
 syn keyword papyrusFunction UnregisterForMenu UnregisterForModEvent UnregisterForNiNodeUpdate UpdateHairColor UpdateThirdPerson UpdateTintMaskColors
 syn keyword papyrusFunction UpdateWeight
 
-" Functions Available in Both
+" SSE Functions
+syn keyword papyrusFunction GetWarmthRating
+
+" Functions Available in Both SKSE/Skyrim?, source: https://www.creationkit.com/index.php?title=User:Cdcooley/Notepad%2B%2B_Papyrus_Syntax_Highlighting
 syn keyword papyrusFunction AddKeyIfNeeded AddToFaction AllowPCDialogue AllowPickpocket AvoidsRoads
 syn keyword papyrusFunction CanFly CanSwim CantOpenDoors CanWalk ClearAllowPCDialogue ClearAllowPickpocket ClearAvoidsRoads ClearCantOpenDoors
 syn keyword papyrusFunction ClearForcedLandingMarker ClearNoCombatInWater ClearNoKNockdowns ClearNoShadow ClearVendor CountLinkedRefChain
@@ -326,7 +329,7 @@ syn keyword papyrusFunction SetNodePositionZ SetNoShadow SetNumber SetSkillLegen
 syn keyword papyrusFunction TraceConditional TranslateToRef TryToAddToFaction TryToClear TryToDisable TryToDisableNoWait TryToEnable TryToEnableNoWait
 syn keyword papyrusFunction TryToEvaluatePackage TryToKill TryToMoveTo TryToRemoveFromFaction TryToReset TryToStopCombat
 
-" Basic Skyrim Events
+" Skyrim Events
 syn keyword papyrusEvent OnActivate OnAnimationEvent OnAnimationEventUnregistered OnAttachedToCell OnBeginState OnCellAttach OnCellDetach OnCellLoad OnClose
 syn keyword papyrusEvent OnCombatStateChanged OnContainerChanged OnDeath OnDestructionStageChanged OnDetachedFromCell OnDying OnEffectFinish OnEffectStart
 syn keyword papyrusEvent OnEndState OnEnterBleedout OnEquipped OnGainLOS OnGetUp OnInit OnGrab OnHit OnItemAdded OnItemRemoved OnLoad OnLocationChange
@@ -343,6 +346,9 @@ syn keyword papyrusEvent OnUnequipped OnUnload OnUpdate OnUpdateGameTime OnWardH
 " SKSE Events
 syn keyword papyrusEvent OnActorAction OnControlDown OnControlUp OnCrosshairRefChange OnKeyDown OnKeyUp OnMenuClose OnMenuOpen OnNiNodeUpdate
 syn keyword papyrusEvent OnPlayerCameraState
+
+" SSE Events
+syn keyword papyrusEvent OnLycanthropyStateChanged OnPlayerFastTravelEnd OnVampirismStateChanged OnVampireFeed
 
 " Not currently used
 " syn match   papyrusIdentifier   "\s*[a-zA-z_][a-zA-Z0-9_]*" contained
