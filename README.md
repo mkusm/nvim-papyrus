@@ -1,11 +1,11 @@
 Vim Plugin for the Papyrus scripting language
 =============================================
 
-A file type plugin for Vim that includes (currently rudimentary) syntax
-highlighting for the Papyrus scripting language used in TES5: Skyrim.
+A file type plugin for Neovim that includes syntax highlighting
+for the Papyrus scripting language used in TES5: Skyrim.
 
-There is also some quickfix mode support to run the Papyrus compiler and parse
-its error messages.
+There is also quickfix mode support to run the Papyrus compiler
+and parse its error messages.
 
 For information on the Papyrus language, visit the Creation Kit website at
 http://www.creationkit.com/
@@ -13,32 +13,39 @@ http://www.creationkit.com/
 Installation
 ------------
 
-Copy the included directories into your personal `.vim/` or `vimfiles/`
-directory. The layout is also compatible with pathogen, vundle and similar
-plugin bundle management tools.
+Install with [vim-plug](https://github.com/junegunn/vim-plug):
 
+```vim
+Plug 'mkusm/nvim-papyrus'
+```
+
+Or with [lazy.nvim](https://github.com/folke/lazy.nvim):
+
+Add this to your `init.lua or plugins.lua`:
+
+```lua
+{
+    "mkusm/nvim-papyrus",
+    config = function()
+        vim.g.skyrim_install_path = 'D:\\SteamLibrary\\steamapps\\common\\Skyrim Special Edition'
+    end
+}
+```
 To enable quickfix compiler support, you must set the `skyrim_install_path`
-variable to the path in which Skyrim is installed, eg (in your `.vimrc`):
+variable to the path in which Skyrim is installed, eg (in your `.lua` config):
 
-    let g:skyrim_install_path='D:\Steam\SteamApps\Common\Skyrim'
+    vim.g.skyrim_install_path = 'D:\\SteamLibrary\\steamapps\\common\\Skyrim Special Edition'
 
 If the variable is set, this will configure the `:make` command to compile the
 script in the current buffer using default compiler flags. Any output
 (including error messages) will be sent to the quickfix list viewable via
 `:copen`.
 
-*Note* while Vim will usually accept forward slash as a path separator on
-Windows, it is recommended that you use backslash in this variable. The path is
-used to set the input, output and flag arguments to the compiler on the command
-line and forward slashes may confuse it.
+*Note* Use backslashes in the path, even if using WSL. nvim-papyrus will convert them
+to forward slashes as needed.
 
 You can also set the `makeprg` option manually, the error message support will
 still be available.
-
-TODO
-----
-
-Tighter grammar rules to help catch syntax errors.
 
 
 License
@@ -49,7 +56,9 @@ me a note if you redistribute this with modifications, but you are under no
 legal obligation to do so.
 
 
-Author/Maintainer
+Authors
 -----------------
 
 Sirtaj Singh Kang
+Infernio
+mkusm
