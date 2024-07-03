@@ -34,7 +34,9 @@ Add this to your `init.lua or plugins.lua`:
 To enable quickfix compiler support, you must set the `skyrim_install_path`
 variable to the path in which Skyrim is installed, eg (in your `.lua` config):
 
+```lua
     vim.g.skyrim_install_path = 'D:\\SteamLibrary\\steamapps\\common\\Skyrim Special Edition'
+```
 
 If the variable is set, this will configure the `:make` command to compile the
 script in the current buffer using default compiler flags. Any output
@@ -60,5 +62,7 @@ Authors
 -----------------
 
 Sirtaj Singh Kang
+
 Infernio
+
 mkusm
