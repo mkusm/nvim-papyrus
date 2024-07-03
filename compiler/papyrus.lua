@@ -50,9 +50,6 @@ if vim.g.skyrim_install_path then
   vim.opt.makeprg = papyrus_compiler .. ' ' .. script_for_compilation .. ' ' .. skyrim_imports .. ' ' .. skyrim_output .. ' ' .. skyrim_flags
 end
 
-vim.print("Papyrus compiler set to: " .. papyrus_compiler)
-vim.print("makeprg set to: " .. vim.opt.makeprg:get())
-
 -- Restore 'cpo' settings
 vim.opt.cpo = cpo_save
 

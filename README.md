@@ -1,4 +1,4 @@
-Vim Plugin for the Papyrus scripting language
+Neovim Plugin for the Papyrus scripting language
 =============================================
 
 A file type plugin for Neovim that includes syntax highlighting
