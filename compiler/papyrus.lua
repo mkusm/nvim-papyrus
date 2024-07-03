@@ -23,10 +23,6 @@ if vim.fn.exists(":CompilerSet") ~= 2 then
   vim.api.nvim_command('command! -nargs=* CompilerSet lua CompilerSet(<f-args>)')
 end
 
--- Save current 'cpo' settings and modify 'cpo'
-local cpo_save = vim.opt.cpo:get()
-vim.opt.cpo:remove("C")
-
 if vim.g.skyrim_install_path then
   local skyrim_install_path = vim.g.skyrim_install_path
 
@@ -50,11 +46,7 @@ if vim.g.skyrim_install_path then
   vim.opt.makeprg = papyrus_compiler .. ' ' .. script_for_compilation .. ' ' .. skyrim_imports .. ' ' .. skyrim_output .. ' ' .. skyrim_flags
 end
 
--- Restore 'cpo' settings
-vim.opt.cpo = cpo_save
-
-vim.opt_local.errorformat:append({
-  [[%f(%l\,%c):\ %m]],
-  [[<unknown>(%l\,%c):\ %m]]
-})
-
+vim.opt_local.errorformat = {
+  '%f\\(%l\\,%c\\): %m',
+  '<unknown>\\(%l\\,%c\\): %m'
+}
