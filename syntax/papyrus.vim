@@ -8,15 +8,9 @@
 " - https://www.creationkit.com/index.php?title=Notepad%2B%2B_Setup
 " - https://github.com/Gawdl3y/atom-language-papyrus
 
-if version < 600
-    syntax clear
-elseif exists("b:current_syntax")
+if exists("b:current_syntax")
     finish
 endif
-
-" Set up the autocompletion to work properly
-setlocal complete+=kSkyrim_Event,kSKSE_Event,kSSE_Event,kSkyrim_Function,kSkyrim_Type,kSkyrim_Keyword,kSKSE_Function,kSKSE_Type,kSSE_Function,kBoth_Function
-setlocal complete-=.
 
 syn case ignore
 
@@ -354,37 +348,28 @@ syn keyword papyrusEvent OnLycanthropyStateChanged OnPlayerFastTravelEnd OnVampi
 " syn match   papyrusIdentifier   "\s*[a-zA-z_][a-zA-Z0-9_]*" contained
 
 " Define the default highlighting.
-if version >= 508 || !exists("did_papyrus_syn_inits")
-    if version < 508
-        let did_papyrus_syn_inits = 1
-        command -nargs=+ HiLink hi link <args>
-    else
-        command -nargs=+ HiLink hi def link <args>
-    endif
+command -nargs=+ HiLink hi def link <args>
 
+HiLink papyrusScript Keyword
+HiLink papyrusKeyword Keyword
+HiLink papyrusImport Keyword
+HiLink papyrusScriptType Type
+HiLink papyrusType Type
+HiLink papyrusBoolean Boolean
+HiLink papyrusConditional Conditional
+HiLink papyrusRepeat Repeat
+HiLink papyrusFunction Function
+HiLink papyrusEvent Function
 
-    HiLink papyrusScript Keyword
-    HiLink papyrusKeyword Keyword
-    HiLink papyrusImport Keyword
-    HiLink papyrusScriptType Type
-    HiLink papyrusType Type
-    HiLink papyrusBoolean Boolean
-    HiLink papyrusConditional Conditional
-    HiLink papyrusRepeat Repeat
-    HiLink papyrusFunction Function
-    HiLink papyrusEvent Function
+HiLink papyrusComment   Comment
+HiLink papyrusTodo Todo
 
-    HiLink papyrusComment   Comment
-    HiLink papyrusTodo Todo
+HiLink papyrusConstant  Constant
+HiLink papyrusNull  Constant
+HiLink papyrusOperator Operator
+HiLink papyrusNumber Number
+HiLink papyrusString String
 
-    HiLink papyrusConstant  Constant
-    HiLink papyrusNull  Constant
-    HiLink papyrusOperator Operator
-    HiLink papyrusNumber Number
-    HiLink papyrusString String
-
-
-    delcommand HiLink
-endif
+delcommand HiLink
 
 let b:current_syntax = "papyrus"
