@@ -19,3 +19,4 @@ for _, filename in ipairs(keyword_files) do
   vim.opt_local.complete:append({'k' .. parent_dir .. filename})
 end
 vim.opt_local.complete:remove({'.'})
+vim.opt_local.complete:append({'.'})

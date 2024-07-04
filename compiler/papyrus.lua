@@ -28,8 +28,9 @@ if vim.g.skyrim_install_path then
 
   local papyrus_compiler = skyrim_install_path .. '\\Papyrus Compiler\\PapyrusCompiler.exe'
   local script_for_compilation = vim.api.nvim_buf_get_name(0)
-  local skyrim_scripts = skyrim_install_path .. '\\Data\\Source\\Scripts'
   local skyrim_source = skyrim_install_path .. '\\Data\\Source'
+  local skyrim_scripts = skyrim_install_path .. '\\Data\\Source\\Scripts'
+  local skyrim_compiled_scripts = skyrim_install_path .. '\\Data\\Scripts'
   local skyrim_imports = skyrim_install_path .. ';' .. skyrim_source .. ';' .. skyrim_scripts
 
   if is_wsl() then
@@ -40,7 +41,7 @@ if vim.g.skyrim_install_path then
   papyrus_compiler = '"' .. papyrus_compiler .. '"'
   script_for_compilation = '"' .. script_for_compilation .. '"'
   skyrim_imports = '-i="' .. skyrim_imports .. '"'
-  skyrim_output = '-o="' .. skyrim_scripts .. '"'
+  skyrim_output = '-o="' .. skyrim_compiled_scripts .. '"'
   skyrim_flags = '-f="' .. skyrim_scripts .. '\\TESV_Papyrus_flags.flg"'
 
   vim.opt.makeprg = papyrus_compiler .. ' ' .. script_for_compilation .. ' ' .. skyrim_imports .. ' ' .. skyrim_output .. ' ' .. skyrim_flags
